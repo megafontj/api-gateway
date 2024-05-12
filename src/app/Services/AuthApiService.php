@@ -16,7 +16,4 @@ class AuthApiService extends ApiProxy
     {
         return new UserDto($this->postJson('auth/register', $data)->getData());
     }
-
-    public function login(): TokenDto
-    {}
 }

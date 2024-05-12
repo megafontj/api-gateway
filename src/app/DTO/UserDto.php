@@ -8,9 +8,9 @@ class UserDto extends DtoMapper
 
     public string $email;
 
-    public string $created_at;
+    public ?string $created_at = null;
 
-    public string $updated_at;
+    public ?string $updated_at = null;
 
     public function __construct(array $data)
     {

@@ -23,7 +23,7 @@ abstract class DtoMapper
     public function mapProperties(array $properties, $data): void
     {
         foreach ($properties as $property) {
-            if (isset($data[$property->getName()])) {
+            if (array_key_exists($property->getName(), $data)) {
                 $this->{$property->getName()} = $data[$property->getName()];
             }
         }

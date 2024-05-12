@@ -6,17 +6,20 @@ use App\DTO\UserDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Services\AuthApiService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+
+    public function __construct(
+        readonly private AuthApiService $authApiService
+    )
+    {
+    }
+
     public function register(RegisterRequest $request): UserResource
     {
-        return new UserResource(new UserDto([
-            'name' => 'Test',
-            'email' => 'test@test.com',
-            'created_at' => 'test',
-            'updated_at' => 'test'
-        ]));
+        return new UserResource($this->authApiService->register($request->validated()));
     }
 }

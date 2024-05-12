@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\TokenDto;
 use App\DTO\UserDto;
 
 class AuthApiService extends ApiProxy
@@ -15,4 +16,7 @@ class AuthApiService extends ApiProxy
     {
         return new UserDto($this->postJson('auth/register', $data)->getData());
     }
+
+    public function login(): TokenDto
+    {}
 }

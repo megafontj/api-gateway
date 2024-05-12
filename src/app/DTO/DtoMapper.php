@@ -16,6 +16,7 @@ abstract class DtoMapper
     }
 
     /**
+     * Если подругому запольнить данные класса DTO то переопридиляй этот метод в нужном DTO класс
      * @param ReflectionProperty[] $properties
      * @param $data
      * @return void

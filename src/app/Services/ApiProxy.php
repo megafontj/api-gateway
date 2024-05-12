@@ -29,7 +29,7 @@ abstract class ApiProxy
         ]);
     }
 
-    public function postJson(string $path, array $data): ApiResponse
+    protected function postJson(string $path, array $data): ApiResponse
     {
         $response = $this->tryRequest(fn() => $this->client->post($path, ['json' => $data]));
 
@@ -42,7 +42,7 @@ abstract class ApiProxy
      * Может быть в сервисе Users какие та поля не проходят валидатцию и GuzzelException возвращает его вообеще по другому
      * а тут конвертируем его что бы на фронтеде безапасно и лего показат ошибки
      */
-    public function tryRequest(Closure $callback): ResponseInterface
+    protected function tryRequest(Closure $callback): ResponseInterface
     {
         try {
             return $callback();
@@ -56,8 +56,7 @@ abstract class ApiProxy
             $responseContents = json_decode($serverException->getResponse()->getBody()->getContents(), true);
             throw new Exception($responseContents['message'], $serverException->getCode());
         } catch (Exception $exception) {
-            $responseContents = json_decode($exception->getResponse()->getBody()->getContents(), true);
-            throw new Exception($responseContents['message'], $exception->getCode());
+            throw new Exception($exception->getMessage());
         }
     }
 

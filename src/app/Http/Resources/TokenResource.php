@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\DTO\TokenDto;
+use App\DTO\UsersAuth\TokenDto;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

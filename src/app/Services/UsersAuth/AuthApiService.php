@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\UsersAuth;
 
-use App\DTO\TokenDto;
-use App\DTO\UserDto;
-use App\AuthProvider\User;
+use App\DTO\UsersAuth\TokenDto;
+use App\DTO\UsersAuth\UserDto;
+use App\Services\ApiProxy;
 
 class AuthApiService extends ApiProxy
 {

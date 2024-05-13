@@ -2,8 +2,8 @@
 
 namespace App\AuthProvider;
 
-use App\DTO\UserDto;
-use App\Services\AuthApiService;
+use App\DTO\UsersAuth\UserDto;
+use App\Services\UsersAuth\AuthApiService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 

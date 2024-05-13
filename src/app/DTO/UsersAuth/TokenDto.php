@@ -1,6 +1,8 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\UsersAuth;
+
+use App\DTO\DtoMapper;
 
 class TokenDto extends DtoMapper
 {

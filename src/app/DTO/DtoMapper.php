@@ -21,7 +21,7 @@ abstract class DtoMapper
      * @param $data
      * @return void
      */
-    public function mapProperties(array $properties, $data): void
+    protected function mapProperties(array $properties, $data): void
     {
         foreach ($properties as $property) {
             if (array_key_exists($property->getName(), $data)) {

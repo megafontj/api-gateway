@@ -11,12 +11,7 @@
 copy `.env.example` to `.env` and fill the setting if needed
 
 ```yaml
-MYSQL_DATABASE=your-database-name
-MYSQL_PASSWORD=your-password
-
-PHPMYADMIN_PORT=3400 # set port for phpmyadmin if 3400 is used by another app
 NGINX_PORT=8080 # port for nginx
-DB_PORT=3306 # port for database
 APP_PORT=9001 # port for laravel app 
 VITE_PORT=5173 # vite for is for npm.
 ```

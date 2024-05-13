@@ -36,6 +36,19 @@ abstract class ApiProxy
         return new ApiResponse($response);
     }
 
+
+    protected function getWithToken(string $path, string $token, array $options = []): ApiResponse
+    {
+        $response = $this->tryRequest(fn() => $this->client->get($path, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token
+            ]
+        ]));
+
+        return new ApiResponse($response);
+    }
+
+
     /**
      * Этот метод конвертирут guzzleHttp Exceptions на ларавлеские Exceptions
      * Почему конвертировать? Потому что подерживать один и тотже Exceptions ответов(responses)

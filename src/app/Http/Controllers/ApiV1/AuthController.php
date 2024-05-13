@@ -10,6 +10,7 @@ use App\Http\Resources\TokenResource;
 use App\Http\Resources\UserResource;
 use App\Services\AuthApiService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -27,5 +28,10 @@ class AuthController extends Controller
     public function login(LoginRequest $request): TokenResource
     {
         return new TokenResource($this->authApiService->login($request->validated()));
+    }
+
+    public function current(): UserResource
+    {
+        return new UserResource(Auth::user());
     }
 }

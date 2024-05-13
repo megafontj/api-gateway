@@ -4,6 +4,8 @@ namespace App\DTO;
 
 class UserDto extends DtoMapper
 {
+    public int $id;
+
     public string $name;
 
     public string $email;

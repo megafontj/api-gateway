@@ -8,16 +8,6 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
       - app
-      - db
-  db:
-    image : mysql
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-    ports:
-      - ${DB_PORT:-3306}:3306
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
   app:
     build: 
       context: ./php
@@ -28,9 +18,3 @@ services:
       - ${APP_PORT:-9001}:900
       - ${VITE_PORT:-5173}:5173
     working_dir: /var/www
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - ${PHPMYADMIN_PORT:-3400}:80
-    depends_on:
-      - db

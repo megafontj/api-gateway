@@ -19,22 +19,20 @@ paths:
   /auth/current:
     $ref: './auth/paths.yaml#/Current'
 
-  /accounts:search:
+  /accounts/search:
     $ref: './accounts/paths.yaml#/SearchAccounts'
   /accounts:
-    $ref: './accounts/paths.yaml#/CreateAccount'
-  /accounts/{id}:
     $ref: './accounts/paths.yaml#/CurrentAccount'
-  /accounts/{id}/followers:
+  /accounts/followers:
     $ref: './accounts/paths.yaml#/AccountFollowers'
-  /accounts/{id}/following:
+  /accounts/following:
     $ref: './accounts/paths.yaml#/AccountFollowing'
-  /accounts/{id}/follow:
+  /accounts/follow:
     $ref: './accounts/paths.yaml#/FollowAccount'
-  /accounts/{id}/unfollow:
+  /accounts/unfollow:
     $ref: './accounts/paths.yaml#/UnfollowAccount'
 
-  /tweets:search:
+  /tweets/search:
     $ref: './tweets/paths.yaml#/SearchTweets'
   /tweets:
     $ref: './tweets/paths.yaml#/CreateTweet'

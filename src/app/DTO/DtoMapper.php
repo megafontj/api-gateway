@@ -5,7 +5,7 @@ namespace App\DTO;
 use ReflectionClass;
 use ReflectionProperty;
 
-abstract class DtoMapper
+abstract class DtoMapper implements DtoCollectorInterface
 {
     public function __construct(array $data)
     {
@@ -28,5 +28,10 @@ abstract class DtoMapper
                 $this->{$property->getName()} = $data[$property->getName()];
             }
         }
+    }
+
+    public static function collection(array $data, $meta = null): DtoCollection
+    {
+        return new DtoCollection(array_map(fn ($dto) => new static($dto), $data), $meta);
     }
 }

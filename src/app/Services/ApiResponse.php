@@ -21,7 +21,7 @@ final class ApiResponse implements ArrayAccess
 
     public function getMeta(): array
     {
-        return $this->data['meta'] ?? [];
+        return $this->data['meta'] ?? array_diff_key($this->data, array_flip(['data']));
     }
 
     public function offsetExists(mixed $offset): bool

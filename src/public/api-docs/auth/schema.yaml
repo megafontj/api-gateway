@@ -1,0 +1,66 @@
+ReadOnlyProperties:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+      description: ID user
+    created_at:
+      type: string
+      format: date-time
+    updated_at:
+      type: string
+      format: date-time
+
+Email:
+  type: object
+  properties:
+    email:
+      type: string
+      example: safar@gmail.com
+      description: Email of user
+
+ExcludeInResponseFields:
+  type: object
+  properties:
+    password:
+      type: string
+      example: secret
+      description: Password
+    password_confirmation:
+      type: string
+      example: secret
+      description: Confirmation password
+
+RegisterRequest:
+  allOf:
+    - $ref: '#/Email'
+    - $ref: '#/ExcludeInResponseFields'
+
+LoginRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      format: email
+      description: Email
+    password:
+      type: string
+      description: Password
+
+LoginResponse:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        token:
+          type: string
+
+RegisterResponse:
+  type: object
+  properties:
+    data:
+      allOf:
+        - $ref: '#/ReadOnlyProperties'
+        - $ref: '#/Email'

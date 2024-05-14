@@ -1,0 +1,77 @@
+Register:
+  post:
+    tags:
+      - Auth
+    summary: Регистрация нового пользователя
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schema.yaml#/RegisterRequest'
+    responses:
+      '200':
+        description: Пользователь успешно зарегистрирован
+        content:
+          application/json:
+            schema:
+              $ref: './schema.yaml#/RegisterResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+Login:
+  post:
+    tags:
+      - Auth
+    summary: Вход в системе
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schema.yaml#/LoginRequest'
+    responses:
+      '200':
+        description: Пользователь успешно вошел в систему
+        content:
+          application/json:
+            schema:
+              $ref: './schema.yaml#/LoginResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+Logout:
+  post:
+    tags:
+      - Auth
+    summary: Выход
+    description: Метод выхода пользователя из системы
+    responses:
+      '200':
+        description: User logout
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyResource'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+Current:
+  get:
+    tags:
+      - Auth
+    summary: Получить текущего пользователя по токену
+    responses:
+      '200':
+        description: Успешный ответ
+        content:
+          application/json:
+            schema:
+              $ref: './schema.yaml#/RegisterResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error

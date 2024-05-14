@@ -1,0 +1,59 @@
+ReadOnlyProperties:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+      description: ID user
+    created_at:
+      type: string
+      format: date-time
+    updated_at:
+      type: string
+      format: date-time
+    followers_count:
+      type: integer
+      example: 10
+    following_count:
+      type: integer
+      example: 10
+
+AccountsFillableProperties:
+  type: object
+  properties:
+    username:
+      type: string
+      description: Accountname (unique)
+    name:
+      type: string
+      example: Muhammad
+      description: Name of user
+    email:
+      type: string
+      example: safar@gmail.com
+      description: Email of user
+    auth_id:
+      type: integer
+      example: 12
+      description: Auth id form Auth service
+Account:
+  allOf:
+    - $ref: '#/ReadOnlyProperties'
+    - $ref: '#/AccountsFillableProperties'
+
+AccountUpdateOrCreateRequest:
+  $ref: '#/AccountsFillableProperties'
+
+AccountResponse:
+  type: object
+  properties:
+    data:
+      $ref: '#/Account'
+
+AccountsResponse:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '#/Account'

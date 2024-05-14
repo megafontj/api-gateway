@@ -1,0 +1,98 @@
+SearchTweets:
+  post:
+    tags:
+      - Tweets
+    summary: Получите список твитов или отфильтровать
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../index.yaml#/components/schemas/SearchResourceRequest'
+    responses:
+      '200':
+        description: Успешный ответ
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/TweetsResponse'
+      '401':
+        description: Unauthorized
+CreateTweet:
+  post:
+    tags:
+      - Tweets
+    summary: Создать твит
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/TweetCreateRequest'
+    responses:
+      '200':
+        description: Твит создан
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/TweetResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+CurrentTweet:
+  get:
+    tags:
+      - Tweets
+    summary: Получить твит по id
+    description: Получить твит по id
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+      - $ref: '../index.yaml#/components/parameters/QueryInclude'
+    responses:
+      '200':
+        description: Tweet Created
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/TweetResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+  delete:
+    tags:
+      - Tweets
+    summary: Удалить твит по id
+    description: Удалить твит по id
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      '200':
+        description: Твит удален
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyResource'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+  patch:
+    tags:
+      - Tweets
+    summary: Обновить твит по id
+    description: Обновить твит по id
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/TweetUpdateRequest'
+    responses:
+      '200':
+        description: Твит обновлен
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/TweetResponse'

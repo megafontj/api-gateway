@@ -1,0 +1,195 @@
+SearchAccounts:
+  post:
+    tags:
+      - Accounts
+    summary: Поиск аккаунтов (index)
+    description: Поиск аккаунтов фильтровать
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../index.yaml#/components/schemas/SearchResourceRequest'
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/AccountsResponse'
+      '401':
+        description: Unauthorized
+
+CreateAccount:
+  post:
+    tags:
+      - Accounts
+    summary: Создание пользователя
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/AccountUpdateOrCreateRequest'
+    responses:
+      '200':
+        description: Создано пользователем
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/AccountResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+
+CurrentAccount:
+  get:
+    tags:
+      - Accounts
+    summary: Получить пользователя по id
+    description: Получить пользователя по id
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+      - $ref: '../index.yaml#/components/parameters/QueryInclude'
+    responses:
+      '200':
+        description: пользователь создано
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/AccountResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+  delete:
+    tags:
+      - Accounts
+    summary: Удалить пользователя по идентификатору id
+    description: Delete user by id
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      '200':
+        description: Account Deleted
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyResource'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+  patch:
+    tags:
+      - Accounts
+    summary: Обновить пользователя по id
+    description: Update user by id
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/AccountUpdateOrCreateRequest'
+    responses:
+      '200':
+        description: Account Updated
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/AccountResponse'
+
+AccountFollowers:
+  get:
+    tags:
+      - Accounts
+    summary: Пользователи, которые подписали на этот пользователем
+    description: Пользователи, которые подписали на этот пользователем
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      '200':
+        description: Account's followers
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/AccountsResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+AccountFollowing:
+  get:
+    tags:
+      - Accounts
+    summary: Пользователи, на которых подписан пользователь
+    description: Пользователи, на которых подписан пользователь
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      '200':
+        description: Account's followers
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yaml#/AccountsResponse'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+FollowAccount:
+  post:
+    tags:
+      - Accounts
+    summary: Подписаться на пользователя
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 1
+    responses:
+      '200':
+        description: Account Created
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyResource'
+      '400':
+        description: Bad request
+      500:
+        description: Server error
+UnfollowAccount:
+  post:
+    tags:
+      - Accounts
+    summary: Отписаться от пользователя
+    parameters:
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 1
+    responses:
+      '200':
+        description: Account Created
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyResource'
+      '400':
+        description: Bad request
+      500:
+        description: Server error

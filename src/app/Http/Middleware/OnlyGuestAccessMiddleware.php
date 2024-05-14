@@ -21,7 +21,7 @@ class OnlyGuestAccessMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $token = $request->bearerToken();
-        if ($token && $this->authApiService->currentUser($token)) {
+        if ($token && $this->authApiService->currentUser($token)->id) {
             abort(403, 'You are already logged in');
         }
 

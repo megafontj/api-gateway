@@ -1,0 +1,58 @@
+ReadOnlyProperties:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+      description: ID Tweet
+    created_at:
+      type: string
+      format: date-time
+    updated_at:
+      type: string
+      format: date-time
+
+TweetFillableProperties:
+  type: object
+  properties:
+    content:
+      type: string
+      description: Tweet text
+    user_id:
+      type: string
+      description: Tweet id from Account service
+
+Relationships:
+  type: object
+  properties:
+    owner:
+      $ref: '../accounts/schemas.yaml#/Account'
+
+Tweet:
+  allOf:
+    - $ref: '#/ReadOnlyProperties'
+    - $ref: '#/TweetFillableProperties'
+    - $ref: '#/Relationships'
+
+TweetCreateRequest:
+  $ref: '#/TweetFillableProperties'
+
+TweetUpdateRequest:
+  type: object
+  properties:
+    content:
+      type: string
+
+TweetResponse:
+  type: object
+  properties:
+    data:
+      $ref: '#/Tweet'
+
+TweetsResponse:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '#/Tweet'

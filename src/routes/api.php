@@ -14,4 +14,6 @@ Route::middleware(OnlyGuestAccessMiddleware::class)
         Route::post('/login', 'login');
     });
 
-Route::post('auth/current', [AuthController::class, 'current']);
+Route::middleware('auth:api')->group(function () {
+    Route::post('auth/current', [AuthController::class, 'current']);
+});

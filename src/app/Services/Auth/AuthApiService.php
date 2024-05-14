@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Services\UsersAuth;
+namespace App\Services\Auth;
 
-use App\DTO\UsersAuth\TokenDto;
-use App\DTO\UsersAuth\UserDto;
+use App\DTO\Auth\TokenDto;
+use App\DTO\Auth\UserDto;
+use App\Services\Accounts\AccountApiService;
 use App\Services\ApiProxy;
+use Illuminate\Support\Facades\Auth;
 
 class AuthApiService extends ApiProxy
 {
-    public function __construct()
+    public function __construct(
+        private AccountApiService $accountApiService
+    )
     {
         parent::__construct(config('microservices.users_auth.base_uri'));
     }
@@ -25,6 +29,11 @@ class AuthApiService extends ApiProxy
 
     public function currentUser(string $token): UserDto
     {
-        return new UserDto($this->getWithToken('auth/current', $token)->getData());
+        $user = new UserDto($this->getWithToken('auth/current', $token)->getData());
+
+        $account = $this->accountApiService->getAccountByAuthId($user->id);
+        $user->account = $account;
+
+        return $user;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\UsersAuth;
+namespace App\DTO\Auth;
 
 use App\DTO\DtoMapper;
 

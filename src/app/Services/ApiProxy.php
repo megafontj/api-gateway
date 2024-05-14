@@ -49,6 +49,16 @@ abstract class ApiProxy
     }
 
 
+    protected function getJson($path, $queryParams = null): ApiResponse
+    {
+        $response = $this->tryRequest(fn() => $this->client->get($path, [
+            'query' => $queryParams
+        ]));
+
+        return new ApiResponse($response);
+    }
+
+
     /**
      * Этот метод конвертирут guzzleHttp Exceptions на ларавлеские Exceptions
      * Почему конвертировать? Потому что подерживать один и тотже Exceptions ответов(responses)

@@ -2,8 +2,8 @@
 
 namespace App\AuthProvider;
 
-use App\DTO\UsersAuth\UserDto;
-use App\Services\UsersAuth\AuthApiService;
+use App\DTO\Auth\UserDto;
+use App\Services\Auth\AuthApiService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 
@@ -42,7 +42,6 @@ class TokenUserProvider implements UserProvider
         }
 
         $userDto = $this->authApiService->currentUser($token);
-
         return $this->fillAuthUser($userDto);
     }
 
@@ -60,8 +59,8 @@ class TokenUserProvider implements UserProvider
     {
         return new User(
             $user->id,
-            $user->name,
             $user->email,
+            $user->account,
             $user->created_at,
             $user->updated_at
         );

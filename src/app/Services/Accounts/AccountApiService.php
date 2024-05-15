@@ -32,6 +32,11 @@ class AccountApiService extends ApiProxy
         return new AccountDto($this->getJson('users/' . $id)->getData());
     }
 
+    public function getAccountById(int $id): AccountDto
+    {
+        return new AccountDto($this->getJson('users/' . $id)->getData());
+    }
+
     public function updateAccount(array $data)
     {
         $id = Auth::user()->account->id;

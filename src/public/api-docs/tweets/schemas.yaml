@@ -11,6 +11,9 @@ ReadOnlyProperties:
     updated_at:
       type: string
       format: date-time
+    user_id:
+      type: string
+      description: Tweet id from Account service
 
 TweetFillableProperties:
   type: object
@@ -18,9 +21,7 @@ TweetFillableProperties:
     content:
       type: string
       description: Tweet text
-    user_id:
-      type: string
-      description: Tweet id from Account service
+
 
 Relationships:
   type: object

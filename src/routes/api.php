@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiV1\AccountController;
 use App\Http\Controllers\ApiV1\AuthController;
+use App\Http\Controllers\ApiV1\TweetController;
 use App\Http\Middleware\OnlyGuestAccessMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +25,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('accounts/following', [AccountController::class, 'following']);
     Route::post('accounts/follow', [AccountController::class, 'followUser']);
     Route::post('accounts/unfollow', [AccountController::class, 'unfollowUser']);
+
+    Route::post('tweets/search', [TweetController::class, 'index']);
+    Route::apiResource('tweets', TweetController::class);
 });

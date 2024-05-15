@@ -44,6 +44,13 @@ abstract class ApiProxy
         return new ApiResponse($response);
     }
 
+    protected function delete(string $path, $options = []): ApiResponse
+    {
+        $response = $this->tryRequest(fn() => $this->client->delete($path, $options));
+
+        return new ApiResponse($response);
+    }
+
     protected function getJson($path, $queryParams = null): ApiResponse
     {
         $response = $this->tryRequest(fn() => $this->client->get($path, [

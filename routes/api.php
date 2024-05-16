@@ -16,6 +16,7 @@ Route::middleware(OnlyGuestAccessMiddleware::class)
 
 Route::middleware('auth:api')->group(function () {
     Route::post('auth/current', [AuthController::class, 'current']);
+    Route::post('auth/logout', [AuthController::class, 'logout']);
 
     Route::post('accounts/search', [AccountController::class, 'index']);
     Route::get('account', [AccountController::class, 'show']);

@@ -34,6 +34,11 @@ class AuthApiService extends ApiProxy
         return new TokenDto($this->postJson('auth/login', $data)->getData());
     }
 
+    public function logout(): void
+    {
+        $this->postJson('auth/logout', options: ['headers' => ['Authorization' => 'Bearer ' . request()->bearerToken()]]);
+    }
+
     public function currentUser(string $token): UserDto
     {
         $user = new UserDto($this->getWithToken('auth/current', $token)->getData());

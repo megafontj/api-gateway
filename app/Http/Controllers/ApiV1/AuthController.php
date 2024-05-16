@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\TokenResource;
 use App\Http\Resources\AuthResource;
 use App\Services\Auth\AuthApiService;
+use App\Support\Resources\EmptyResource;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -31,5 +32,11 @@ class AuthController extends Controller
     public function current(): AuthResource
     {
         return new AuthResource(Auth::user());
+    }
+
+    public function logout(): EmptyResource
+    {
+        $this->authApiService->logout();
+        return new EmptyResource();
     }
 }

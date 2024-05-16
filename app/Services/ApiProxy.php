@@ -30,9 +30,9 @@ abstract class ApiProxy
         ]);
     }
 
-    protected function postJson(string $path, array $data = []): ApiResponse
+    protected function postJson(string $path, array $data = [], array $options = []): ApiResponse
     {
-        $response = $this->tryRequest(fn() => $this->client->post($path, ['json' => $data]));
+        $response = $this->tryRequest(fn() => $this->client->post($path, ['json' => $data, ...$options]));
 
         return new ApiResponse($response);
     }

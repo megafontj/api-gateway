@@ -21,17 +21,17 @@ paths:
 
   /accounts/search:
     $ref: './accounts/paths.yaml#/SearchAccounts'
-  /accounts:
+  /account:
     $ref: './accounts/paths.yaml#/CurrentAccount'
   /accounts/{username}:
     $ref: './accounts/paths.yaml#/AccountByUsername'
-  /accounts/followers:
+  /account/followers:
     $ref: './accounts/paths.yaml#/AccountFollowers'
-  /accounts/following:
+  /account/following:
     $ref: './accounts/paths.yaml#/AccountFollowing'
-  /accounts/follow:
+  /account/follow:
     $ref: './accounts/paths.yaml#/FollowAccount'
-  /accounts/unfollow:
+  /account/unfollow:
     $ref: './accounts/paths.yaml#/UnfollowAccount'
 
   /tweets/search:

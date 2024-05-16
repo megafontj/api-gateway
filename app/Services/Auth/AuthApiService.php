@@ -46,7 +46,11 @@ class AuthApiService extends ApiProxy
 
     private function checkUsernameNotExist(array $data)
     {
-
+        $account = $this->accountApiService->search([
+            'filter' => [
+                'username' => $data['username']
+            ]
+        ]);
 
         if (count($account->getData()) > 0) {
             throw ValidationException::withMessages([

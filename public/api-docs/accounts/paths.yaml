@@ -66,7 +66,6 @@ CurrentAccount:
     summary: Получить аккунта
     description: Получить пользователя
     parameters:
-      - $ref: '../index.yaml#/components/parameters/PathId'
       - $ref: '../index.yaml#/components/parameters/QueryInclude'
     responses:
       '200':
@@ -84,8 +83,6 @@ CurrentAccount:
       - Accounts
     summary: Удалить аккунт
     description: Delete аккунт by id
-    parameters:
-      - $ref: '../index.yaml#/components/parameters/PathId'
     responses:
       '200':
         description: Account Deleted
@@ -102,8 +99,6 @@ CurrentAccount:
       - Accounts
     summary: Обновить аккунт
     description: Update user by id
-    parameters:
-      - $ref: '../index.yaml#/components/parameters/PathId'
     requestBody:
       content:
         application/json:

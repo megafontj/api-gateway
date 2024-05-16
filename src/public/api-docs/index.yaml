@@ -23,6 +23,8 @@ paths:
     $ref: './accounts/paths.yaml#/SearchAccounts'
   /accounts:
     $ref: './accounts/paths.yaml#/CurrentAccount'
+  /accounts/{username}:
+    $ref: './accounts/paths.yaml#/AccountByUsername'
   /accounts/followers:
     $ref: './accounts/paths.yaml#/AccountFollowers'
   /accounts/following:

@@ -42,12 +42,29 @@ CreateAccount:
       500:
         description: Server error
 
+AccountByUsername:
+  get:
+    tags:
+      - Accounts
+    summary: Получить пользователя по username
+    description: Получить пользователя по username
+    parameters:
+      - in: path
+        name: username
+        required: true
+        schema:
+          type: string
+          minimum: test
+        description: username
+        example: 1
+      - $ref: '../index.yaml#/components/parameters/QueryInclude'
+
 CurrentAccount:
   get:
     tags:
       - Accounts
-    summary: Получить пользователя по id
-    description: Получить пользователя по id
+    summary: Получить аккунта
+    description: Получить пользователя
     parameters:
       - $ref: '../index.yaml#/components/parameters/PathId'
       - $ref: '../index.yaml#/components/parameters/QueryInclude'
@@ -65,8 +82,8 @@ CurrentAccount:
   delete:
     tags:
       - Accounts
-    summary: Удалить пользователя по идентификатору id
-    description: Delete user by id
+    summary: Удалить аккунт
+    description: Delete аккунт by id
     parameters:
       - $ref: '../index.yaml#/components/parameters/PathId'
     responses:
@@ -83,7 +100,7 @@ CurrentAccount:
   patch:
     tags:
       - Accounts
-    summary: Обновить пользователя по id
+    summary: Обновить аккунт
     description: Update user by id
     parameters:
       - $ref: '../index.yaml#/components/parameters/PathId'
@@ -104,8 +121,8 @@ AccountFollowers:
   get:
     tags:
       - Accounts
-    summary: Пользователи, которые подписали на этот пользователем
-    description: Пользователи, которые подписали на этот пользователем
+    summary: Пользователи, которые подписали на этот аккунт
+    description: Пользователи, которые подписали на этот аккунт
     parameters:
       - $ref: '../index.yaml#/components/parameters/PathId'
     responses:

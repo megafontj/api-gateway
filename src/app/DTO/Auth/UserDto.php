@@ -15,7 +15,7 @@ class UserDto extends DtoMapper
 
     public ?string $updated_at = null;
 
-    public ?AccountDto $account;
+    public ?AccountDto $account = null;
 
     public function __construct(array $data)
     {

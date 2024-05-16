@@ -19,6 +19,10 @@ Email:
       type: string
       example: safar@gmail.com
       description: Email of user
+    name:
+      type: string
+    username:
+      type: string
 
 ExcludeInResponseFields:
   type: object

@@ -7,6 +7,7 @@ use App\DTO\Auth\UserDto;
 use App\Services\Accounts\AccountApiService;
 use App\Services\ApiProxy;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthApiService extends ApiProxy
 {
@@ -19,6 +20,18 @@ class AuthApiService extends ApiProxy
 
     public function register(array $data): UserDto
     {
+        $account = $this->accountApiService->search([
+            'filter' => [
+                'username' => $data['username']
+            ]
+        ]);
+
+        if (count($account->getData()) > 0) {
+            throw ValidationException::withMessages([
+                'username' => 'Username уже занято'
+            ]);
+        }
+
         return new UserDto($this->postJson('auth/register', $data)->getData());
     }
 

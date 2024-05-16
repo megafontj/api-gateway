@@ -19,6 +19,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('accounts/search', [AccountController::class, 'index']);
     Route::get('accounts', [AccountController::class, 'show']);
+    Route::get('accounts/{username}', [AccountController::class, 'accountByUsername']);
     Route::patch('accounts', [AccountController::class, 'update']);
     Route::delete('accounts', [AccountController::class, 'destroy']);
     Route::get('accounts/followers', [AccountController::class, 'followers']);

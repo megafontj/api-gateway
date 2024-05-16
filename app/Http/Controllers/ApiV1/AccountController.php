@@ -35,6 +35,12 @@ class AccountController extends Controller
         return new AccountResource($this->accountApiService->getAccount());
     }
 
+    public function accountByUsername(string $username)
+    {
+        return new AccountResource($this->accountApiService->getAccountByUsername($username));
+    }
+
+
     /**
      * Update the specified resource in storage.
      */

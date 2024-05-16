@@ -56,7 +56,7 @@ AccountByUsername:
           type: string
           minimum: test
         description: username
-        example: 1
+        example: safar
       - $ref: '../index.yaml#/components/parameters/QueryInclude'
 
 CurrentAccount:

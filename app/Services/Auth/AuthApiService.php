@@ -20,19 +20,13 @@ class AuthApiService extends ApiProxy
 
     public function register(array $data): UserDto
     {
-        $account = $this->accountApiService->search([
-            'filter' => [
-                'username' => $data['username']
-            ]
-        ]);
+        $this->checkUsernameNotExist($data);
 
-        if (count($account->getData()) > 0) {
-            throw ValidationException::withMessages([
-                'username' => 'Username уже занято'
-            ]);
-        }
+        $authUser =  new UserDto($this->postJson('auth/register', $data)->getData());
 
-        return new UserDto($this->postJson('auth/register', $data)->getData());
+        $authUser->account = $this->accountApiService->createAccount($data, $authUser);
+
+        return $authUser;
     }
 
     public function login(array $data): TokenDto
@@ -48,5 +42,16 @@ class AuthApiService extends ApiProxy
         $user->account = $account;
 
         return $user;
+    }
+
+    private function checkUsernameNotExist(array $data)
+    {
+
+
+        if (count($account->getData()) > 0) {
+            throw ValidationException::withMessages([
+                'username' => 'Username уже занято'
+            ]);
+        }
     }
 }

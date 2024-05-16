@@ -3,9 +3,11 @@
 namespace App\Services\Accounts;
 
 use App\DTO\Accounts\AccountDto;
+use App\DTO\Auth\UserDto;
 use App\DTO\DtoCollection;
 use App\Services\ApiProxy;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AccountApiService extends ApiProxy
 {
@@ -35,6 +37,21 @@ class AccountApiService extends ApiProxy
     public function getAccountById(int $id): AccountDto
     {
         return new AccountDto($this->getJson('users/' . $id)->getData());
+    }
+
+    public function getAccountByUsername(string $username): AccountDto
+    {
+        $account = $this->search([
+            'filter' => [
+                'username' => $username
+            ]
+        ])->getData()[0] ?? null;
+
+        if (! $account) {
+           throw new NotFoundHttpException('Account not founded by username!');
+        }
+
+        return new AccountDto($account);
     }
 
     public function updateAccount(array $data)
@@ -75,4 +92,18 @@ class AccountApiService extends ApiProxy
 
         $this->postJson($url, ['user_id' => Auth::user()->account->id]);
     }
+
+    public function createAccount(array $data, UserDto $userDto): AccountDto
+    {
+        $response = $this->postJson('users', [
+            'username' => $data['username'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'auth_id' => $userDto->id
+        ]);
+
+        return new AccountDto($response->getData());
+    }
+
+
 }

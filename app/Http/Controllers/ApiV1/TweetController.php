@@ -61,4 +61,12 @@ class TweetController extends Controller
 
         return new EmptyResource();
     }
+
+    //Этот метод возвращает твиты пользователя, на которых подписан авторизованый пользователь.
+    public function followingTweets()
+    {
+        $accounts = $this->tweetApiService->getFollowingTweets();
+
+        return TweetResource::collection($accounts->getData())->additional(['meta' => $accounts->getMeta()]);
+    }
 }

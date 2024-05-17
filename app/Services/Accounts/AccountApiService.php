@@ -105,5 +105,13 @@ class AccountApiService extends ApiProxy
         return new AccountDto($response->getData());
     }
 
+    public function getNotFollowedAccounts()
+    {
+        $id = Auth::user()->id;
+
+        $response = $this->getJson("users/$id/not-followed");
+
+        return AccountDto::collection($response->getData(), $response->getMeta());
+    }
 
 }

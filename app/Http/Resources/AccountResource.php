@@ -25,7 +25,9 @@ class AccountResource extends JsonResource
             'followers_count' => $this->whenNotNull($this->followers_count),
             'following_count' => $this->whenNotNull($this->following_count),
             'followers' => $this->whenNotNull($this->followers),
-            'following' => $this->whenNotNull($this->following)
+            'following' => $this->whenNotNull($this->following),
+            'created_at' => $this->whenNotNull($this->created_at),
+            'updated_at' => $this->whenNotNull($this->updated_at),
         ];
     }
 }

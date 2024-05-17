@@ -59,6 +59,18 @@ class TweetApiService extends ApiProxy
         return $this->delete("tweets/$id");
     }
 
+
+    public function getFollowingTweets(): DtoCollection
+    {
+       $following = $this->accountApiService->getFollowing();
+       $followingIds = array_values(array_column($following->getData(), 'id'));
+
+       return $this->search([
+           'filter' => ['user_id' => $followingIds]
+       ]);
+    }
+
+
     private function mergeWithAccounts($tweets)
     {
         $ownerIds = array_values(array_unique(array_column($tweets->getData(), 'user_id')));

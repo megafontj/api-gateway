@@ -24,10 +24,13 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('account', [AccountController::class, 'update']);
     Route::delete('account', [AccountController::class, 'destroy']);
     Route::get('account/followers', [AccountController::class, 'followers']);
+    Route::get('account/not-followed', [AccountController::class, 'notFollowedAccounts']);
     Route::get('account/following', [AccountController::class, 'following']);
+
     Route::post('account/follow', [AccountController::class, 'followUser']);
     Route::post('account/unfollow', [AccountController::class, 'unfollowUser']);
 
     Route::post('tweets/search', [TweetController::class, 'index']);
     Route::apiResource('tweets', TweetController::class);
+    Route::get('account/following/tweets', [TweetController::class, 'followingTweets']);
 });

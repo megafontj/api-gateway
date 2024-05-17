@@ -57,6 +57,13 @@ class AccountController extends Controller
         throw new \Exception('Просто так нельзя удалить пользователя!!');
     }
 
+    public function notFollowedAccounts()
+    {
+        $accounts = $this->accountApiService->getNotFollowedAccounts();
+
+        return AccountResource::collection($accounts->getData())->additional(['meta' => $accounts->getMeta()]);
+    }
+
     public function followers(): AnonymousResourceCollection
     {
         $accounts = $this->accountApiService->getFollowers();
@@ -84,4 +91,5 @@ class AccountController extends Controller
 
         return new EmptyResource();
     }
+
 }
